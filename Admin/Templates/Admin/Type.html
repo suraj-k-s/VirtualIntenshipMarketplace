@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="frmType" method="POST">
+        
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Type</td>
+                <td><input type="text" name="type_name" placeholder="Enter Type" required></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="Save">
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details Form</title>
+</head>
+<body>
+
+<h2>Course Details Form</h2>
+
+<form name="frmCourseName" method="POST">
+    {% csrf_token %}
+    <table border="1">
+        <tr>
+            <td>Course Name:</td>
+            <td><input type="text" name="course_name" required value="{{dis.Course_name}}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Save"></td>
+        </tr>
+    </table>
+</form>
+<table border="1">
+    <tr>
+        <td>Sl.no</td>
+        <td>Course</td>
+        <td>Action</td>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.Course_name}}</td>
+        <td><a href="{% url 'webadmin:CourseDelete' i.id  %}">Delete</a></td>
+        <td><a href="{% url 'webadmin:CourseEdit' i.id  %}">Edit</a></td>
+    </tr>
+    {%  endfor %}
+</table>
+
+</body>
+</html>

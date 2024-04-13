@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Registration Form</title>
+</head>
+<body>
+
+<h2>Company Registration</h2>
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <table border="1">
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" name="name"></td>
+        </tr>
+        <tr>
+            <td>Contact:</td>
+            <td><input type="text" name="contact"></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input type="email" name="email"></td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td><textarea name="details"></textarea></td>
+        </tr>
+        <tr>
+            <td>District:</td>
+            <td><select name="district" id="district">
+              <option value="">Select District</option>
+              {% for i in district_id %}
+              <option value="{{i.id}}">{{i.district_name}}</option>
+              {% endfor %}
+          </select></td>
+        </tr>
+        <tr>
+            <td>Place:</td>
+            <td>
+                <select name="place" id="place">
+                    <option value="place">Place</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Proof:</td>
+            <td><input type="file" name="proof" accept="image/*"></td>
+        </tr>
+        <tr>
+            <td>Photo:</td>
+            <td><input type="file" name="photo" accept="image/*"></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="password" name="password"></td>
+        </tr>
+    </table>
+
+    <br>
+
+    <input type="submit" value="Register">
+
+</form>
+
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#district").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'webguest:ajaxplace' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#place").html(data);
+            },
+        });
+    });
+    
+</script>

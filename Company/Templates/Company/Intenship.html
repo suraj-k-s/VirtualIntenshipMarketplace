@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+    <table border="1">
+        <tr>
+            <th colspan="2" class="center">Internship Details</th>
+        </tr>
+        <tr>
+            <td>Internship Duration:</td>
+            <td><input type="text" name="duration" required value="{{dis.Intenship_duration}}"/></td>
+        </tr>
+        <tr>
+            <td>Internship Details:</td>
+            <td><textarea name="details"  value="{{dis.Intenship_details}}" rows="4"></textarea></td>
+        </tr>
+        <tr>
+            <td>Poster:</td>
+            <td><input type="file" name="poster" value="{{dis.Intenship_poster}}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="center">
+                <input type="submit" value="Save" />
+                <input type="button" value="Cancel">
+            </td>
+        </tr>
+    </table>
+    </form>
+    <table border="1">
+        <tr>
+            <td>Sl.no</td>
+            <td>Intenship duration</td>
+            <td>Intenship details</td>
+            <td>Intenship poster</td>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.Intenship_duration}}</td>
+            <td>{{i.Intenship_details}}</td>
+            <td>{{i.Intenship_poster}}</td> 
+            <td><a href="{% url 'webcopmany:IntenshipDelete' i.id  %}">Delete</a></td>
+        </tr>
+        {%  endfor %}
+
+</body>
+</html>

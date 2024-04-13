@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLACE</title>
+</head>
+<body>
+    <table>
+    <form name="frmPlaceName" method="POST">
+    {% csrf_token %}
+    <tr>
+        <td>District:</td>
+        <td>
+            <select name="district">
+                <option value="">Select District</option>
+                {% for i in districtdata %}
+                <option
+                {% if i.id == dis.district_id %}
+                selected
+                {% endif %}
+                value="{{i.id}}">{{i.district_name}}</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    <td>Place Name:</td>
+    <td><input type="text" name="PlaceName" required value="{{dis.Place_name}}"></td>
+    <tr>
+    <td colspan="2" align="center">
+    <input type="Submit" value="Add"
+    </tr>
+</td>
+</body>
+</table>
+</form>
+<table border="1">
+    <tr>
+        <td>Sl.no</td>
+        <td>District</td>
+        <td>Place</td>
+        <td>Action</td>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.district.district_name}}</td>
+        <td>{{i.Place_name}}</td>
+        <td><a href="{% url 'webadmin:PlaceDelete' i.id  %}">Delete</a></td>
+        <td><a href="{% url 'webadmin:PlaceEdit' i.id  %}">Edit</td>
+    </tr>
+    {%  endfor %}
+</table>
+</html>
